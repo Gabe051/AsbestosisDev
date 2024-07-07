@@ -1,3 +1,27 @@
-[gd_scene format=3 uid="uid://dn8bl2u6mr243"]
+[gd_scene load_steps=3 format=3 uid="uid://dn8bl2u6mr243"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pdamw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jpnc2"]
+size = Vector3(18.3132, 0.850941, 17.0395)
 
 [node name="Main" type="Node"]
+
+[node name="Structures" type="Node" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Structures"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49117, 0)
+
+[node name="GroundVis" type="MeshInstance3D" parent="Structures/Ground"]
+transform = Transform3D(18.3132, 0, 0, 0, 0.850941, 0, 0, 0, 17.0395, 0, 0, 0)
+mesh = SubResource("BoxMesh_pdamw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Structures/Ground"]
+transform = Transform3D(0.99862, 0, 0, 0, 0.99862, 0, 0, 0, 0.99862, 0.0679602, 0, 0)
+shape = SubResource("BoxShape3D_jpnc2")
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(0.999999, -0.00112537, 0.000103504, 0.000357616, 0.401991, 0.915644, -0.00107204, -0.915643, 0.401991, -0.00568104, 8.84349, 0.332421)
+shadow_enabled = true
