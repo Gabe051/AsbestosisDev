@@ -5,7 +5,7 @@ extends State
 @onready var player := $"../.."
 
 func enter() -> void:
-	print("now sprinting")
+	player.target_speed = 8.0
 	
 func exit() -> void:
 	pass

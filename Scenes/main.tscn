@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dn8bl2u6mr243"]
+[gd_scene load_steps=12 format=3 uid="uid://dn8bl2u6mr243"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_aoy2g"]
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="2_bfwtv"]
@@ -10,6 +10,15 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jpnc2"]
 size = Vector3(18.3132, 0.850941, 17.0395)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_21yhi"]
+
+[sub_resource type="Sky" id="Sky_igu8j"]
+sky_material = SubResource("ProceduralSkyMaterial_21yhi")
+
+[sub_resource type="Environment" id="Environment_36w63"]
+background_mode = 2
+sky = SubResource("Sky_igu8j")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iq1uk"]
 
@@ -28,6 +37,12 @@ mesh = SubResource("BoxMesh_pdamw")
 transform = Transform3D(0.99862, 0, 0, 0, 0.99862, 0, 0, 0, 0.99862, 0.0679602, 0, 0)
 shape = SubResource("BoxShape3D_jpnc2")
 
+[node name="CSGBox3D" type="CSGBox3D" parent="Structures"]
+transform = Transform3D(1, 0, 0, 0, 4.89578, 0, 0, 0, 10.5881, 9.17808, 2.41712, -0.130502)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Structures"]
+transform = Transform3D(1, 0, 0, 0, 4.89578, 0, 0, 0, 10.5881, 8.81193, 2.41712, 18.4633)
+
 [node name="Lights" type="Node" parent="."]
 
 [node name="Environment" type="Node" parent="."]
@@ -36,6 +51,9 @@ shape = SubResource("BoxShape3D_jpnc2")
 transform = Transform3D(0.999999, -0.00108784, -0.00030623, 0.000357616, 0.0475547, 0.998869, -0.00107204, -0.998868, 0.0475551, -0.00568104, 8.84349, 0.332421)
 light_energy = 0.677
 shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_36w63")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 script = ExtResource("1_aoy2g")

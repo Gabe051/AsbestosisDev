@@ -2,8 +2,6 @@ class_name StateMachine
 
 extends State
 
-
-
 @export var current_state : State
 var states: Dictionary = {}
 
