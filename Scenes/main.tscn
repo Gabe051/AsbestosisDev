@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn8bl2u6mr243"]
+[gd_scene load_steps=9 format=3 uid="uid://dn8bl2u6mr243"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_aoy2g"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="2_bfwtv"]
+[ext_resource type="Script" path="res://Scripts/States/IdlePlayerState.gd" id="3_1h6mn"]
+[ext_resource type="Script" path="res://Scripts/States/WalkingPlayerState.gd" id="4_2rade"]
+[ext_resource type="Script" path="res://Scripts/States/SprintingPlayerState.gd" id="5_785xw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pdamw"]
 
@@ -17,7 +21,7 @@ size = Vector3(18.3132, 0.850941, 17.0395)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49117, 0)
 
 [node name="GroundVis" type="MeshInstance3D" parent="Structures/Ground"]
-transform = Transform3D(18.3132, 0, 0, 0, 0.850941, 0, 0, 0, 17.0395, 0, 0, 0)
+transform = Transform3D(89.5759, 0, 0, 0, 0.845658, 0, 0, 0, 86.5329, 0, 0, 0)
 mesh = SubResource("BoxMesh_pdamw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Structures/Ground"]
@@ -44,3 +48,16 @@ shape = SubResource("CapsuleShape3D_iq1uk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player/Head"]
+
+[node name="StateMachine" type="Node" parent="Player" node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_bfwtv")
+current_state = NodePath("IdlePlayerState")
+
+[node name="IdlePlayerState" type="Node" parent="Player/StateMachine"]
+script = ExtResource("3_1h6mn")
+
+[node name="WalkingPlayerState" type="Node" parent="Player/StateMachine"]
+script = ExtResource("4_2rade")
+
+[node name="SprintingPlayerState" type="Node" parent="Player/StateMachine"]
+script = ExtResource("5_785xw")
