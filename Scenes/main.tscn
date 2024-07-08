@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn8bl2u6mr243"]
+[gd_scene load_steps=5 format=3 uid="uid://dn8bl2u6mr243"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_aoy2g"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pdamw"]
 
@@ -27,17 +29,18 @@ shape = SubResource("BoxShape3D_jpnc2")
 [node name="Environment" type="Node" parent="."]
 
 [node name="Sun" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(0.999999, -0.000676258, 0.000905452, 0.000357616, 0.949386, 0.314113, -0.00107204, -0.314113, 0.949385, -0.00568104, 8.84349, 0.332421)
+transform = Transform3D(0.999999, -0.00108784, -0.00030623, 0.000357616, 0.0475547, 0.998869, -0.00107204, -0.998868, 0.0475551, -0.00568104, 8.84349, 0.332421)
 light_energy = 0.677
 shadow_enabled = true
 
 [node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("1_aoy2g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_iq1uk")
 
-[node name="Pivot" type="Node3D" parent="Player"]
+[node name="Head" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Player/Pivot"]
+[node name="Camera3D" type="Camera3D" parent="Player/Head"]
