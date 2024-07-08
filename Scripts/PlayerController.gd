@@ -20,4 +20,8 @@ func _input(event):
 		head.rotation.x = clamp(head.rotation.x,-(PI/2.0), PI/2.0,)
 
 func _physics_process(delta):
+	curr_dir = lerp(curr_dir, transform.basis * 
+			Vector3(input_dir.x, 0, input_dir.y).normalized(), delta * lerp_speed)
+			
+	velocity = curr_dir * target_speed
 	move_and_slide()

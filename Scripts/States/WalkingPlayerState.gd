@@ -14,10 +14,7 @@ func exit() -> void:
 	pass
 
 func physics_update(delta : float) -> void:
-	player.curr_dir = lerp(player.curr_dir, player.transform.basis * 
-			Vector3(player.input_dir.x, 0, player.input_dir.y).normalized(), delta * player.lerp_speed)
-			
-	player.velocity = player.curr_dir * player.target_speed
+	pass
 	
 func update(delta : float) -> void:
 	player.input_dir = Input.get_vector("left","right", "forward", "backward")
