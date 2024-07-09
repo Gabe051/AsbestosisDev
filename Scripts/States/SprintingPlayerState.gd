@@ -5,7 +5,7 @@ extends State
 @onready var player := $"../.."
 
 func enter() -> void:
-	player.target_speed = 10.0
+	player.target_speed = 9.0
 	
 func exit() -> void:
 	pass
@@ -21,8 +21,15 @@ func update(delta : float) -> void:
 	else:
 		transition.emit("WalkingPlayerState")
 	
+	if Input.is_action_just_pressed("crouch"):
+		transition.emit("CrouchingPlayerState")
+	
+	if Input.is_action_just_pressed("crawl"):
+		transition.emit("CrawlingPlayerState")
+		
 func physics_update(delta : float) -> void:
-	pass
+	if not player.is_on_floor():
+		transition.emit("FallingPlayerState")
 	
 func handle_input(event) -> void:
 	pass

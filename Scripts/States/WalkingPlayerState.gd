@@ -21,9 +21,15 @@ func update(delta : float) -> void:
 	if player.input_dir == Vector2.ZERO:
 		transition.emit("IdlePlayerState")
 	
+	if Input.is_action_just_pressed("crouch"):
+		transition.emit("CrouchingPlayerState")
+	
 	if Input.is_action_pressed("sprint"):
 		transition.emit("SprintingPlayerState")
 		
+	if Input.is_action_just_pressed("crawl"):
+		transition.emit("CrawlingPlayerState")
+	
 
 func handle_input(event) -> void:
 	pass

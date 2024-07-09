@@ -1,11 +1,20 @@
 extends CharacterBody3D
-
+#Mouse
 const mouse_sens = 0.2
+#Speed
 var target_speed = 0.0
 var current_speed = 0.0
+#Directional movement input values
 var lerp_speed =  9.0
 var curr_dir = Vector3.ZERO
 var input_dir = Vector2.ZERO
+#Capsule height, crouch and crawldepth
+const height = 1.8
+var target_height = 1.8
+var crouch_depth = -0.65
+var crawl_depth = -1.3
+
+var gravity = 12.5
 
 @onready var head := $Head
 
@@ -20,8 +29,12 @@ func _input(event):
 		head.rotation.x = clamp(head.rotation.x,-(PI/2.0), PI/2.0,)
 
 func _physics_process(delta):
+	
+	
 	curr_dir = lerp(curr_dir, transform.basis * 
 			Vector3(input_dir.x, 0, input_dir.y).normalized(), delta * lerp_speed)
 			
-	velocity = curr_dir * target_speed
+	velocity.x = curr_dir.x * target_speed
+	velocity.z = curr_dir.z * target_speed
+	
 	move_and_slide()
