@@ -10,10 +10,16 @@ func enter() -> void:
 	player.target_speed = 2.0
 	player.target_height = player.height + player.crawl_depth
 	crawl_transition = true
+	player.standing_capsule.set_disabled(true)
+	player.crouching_capsule.set_disabled(true)
+	player.crawling_capsule.set_disabled(false)
+	
 	
 func exit() -> void:
 	player.target_height = player.height
 	crawl_transition = true
+	player.crawling_capsule.set_disabled(true)
+	player.standing_capsule.set_disabled(false)
 	
 func _process(delta):
 	# this needs to be separated from the update function because it needs to perform the transition animation
@@ -26,10 +32,10 @@ func _process(delta):
 func update(delta : float) -> void:
 	player.input_dir = Input.get_vector("left","right", "forward", "backward")
 	
-	if Input.is_action_just_pressed("crawl"):
+	if Input.is_action_just_pressed("crawl") and !player.standing_cast.is_colliding():
 		transition.emit("IdlePlayerState")
 		
-	if Input.is_action_just_pressed("crouch"):
+	if Input.is_action_just_pressed("crouch") and !player.crouching_cast.is_colliding():
 		crawl_transition = false #Ensure that only crawl or crouch transition plays at a time
 		transition.emit("CrouchingPlayerState")
 	

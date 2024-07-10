@@ -11,11 +11,15 @@ func enter() -> void:
 	player.target_speed = 4.0
 	player.target_height = player.height + player.crouch_depth
 	crouch_transition = true
+	player.standing_capsule.set_disabled(true)
+	player.crouching_capsule.set_disabled(false)
 	
 func exit() -> void:
 	player.target_height = player.height
 	crouch_transition = true
-	pass
+	player.standing_capsule.set_disabled(false)
+	player.crouching_capsule.set_disabled(true)
+	
 	
 func _process(delta):
 	# this needs to be separated from the update function because it needs to perform the transition animation
@@ -31,7 +35,7 @@ func update(delta : float) -> void:
 	
 	player.input_dir = Input.get_vector("left","right", "forward", "backward")
 	
-	if Input.is_action_just_pressed("crouch"):
+	if Input.is_action_just_pressed("crouch") and !player.standing_cast.is_colliding():
 		crouch_transition = true
 		transition.emit("IdlePlayerState")
 		

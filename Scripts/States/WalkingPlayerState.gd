@@ -10,11 +10,14 @@ func enter() -> void:
 	player.target_speed = 6.0
 	
 	
+	
+	
 func exit() -> void:
 	pass
 
 func physics_update(delta : float) -> void:
-	pass
+	if not player.is_on_floor():
+		transition.emit("FallingPlayerState")
 	
 func update(delta : float) -> void:
 	player.input_dir = Input.get_vector("left","right", "forward", "backward")

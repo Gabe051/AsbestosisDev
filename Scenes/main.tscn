@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dn8bl2u6mr243"]
+[gd_scene load_steps=20 format=3 uid="uid://dn8bl2u6mr243"]
 
 [ext_resource type="Texture2D" uid="uid://c5vnq84kslt6y" path="res://Assets/Textures/texture_07.png" id="1_01wmr"]
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_aoy2g"]
@@ -32,6 +32,13 @@ background_mode = 2
 sky = SubResource("Sky_igu8j")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iq1uk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w8fdp"]
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4woau"]
+radius = 0.4
+height = 0.8
 
 [node name="Main" type="Node"]
 
@@ -123,7 +130,13 @@ size = Vector3(1, 1.08798, 1.1846)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Structures/Level"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.9376, 2.0185, -11.3279)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.9376, 2.0185, -13.8221)
+use_collision = true
+size = Vector3(5.60742, 1.08798, 4.37257)
+material = ExtResource("2_ktuli")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Structures/Level"]
+transform = Transform3D(-4.37114e-08, -3.35679e-11, 1, -0.000767945, 1, 0, -1, -0.000767945, -4.37114e-08, 16.6648, 1.29526, -13.8221)
 use_collision = true
 size = Vector3(5.60742, 1.08798, 4.37257)
 material = ExtResource("2_ktuli")
@@ -141,10 +154,10 @@ shadow_enabled = true
 environment = SubResource("Environment_36w63")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12233, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0597537, 0)
 script = ExtResource("1_aoy2g")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="StandingCapsule" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_iq1uk")
 
@@ -174,3 +187,17 @@ script = ExtResource("9_6kkoq")
 
 [node name="FallingPlayerState" type="Node" parent="Player/StateMachine"]
 script = ExtResource("10_5686t")
+
+[node name="CrouchingCapsule" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.748899, 0)
+shape = SubResource("CapsuleShape3D_w8fdp")
+
+[node name="CrawlingCapsule" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000533789, 0.379769, -0.00194401)
+shape = SubResource("CapsuleShape3D_4woau")
+
+[node name="StandingCast" type="RayCast3D" parent="Player"]
+target_position = Vector3(0, 2, 0)
+
+[node name="CrouchingCast" type="RayCast3D" parent="Player"]
+target_position = Vector3(0, 1.5, 0)

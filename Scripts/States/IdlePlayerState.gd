@@ -7,6 +7,8 @@ extends State
 func enter() -> void:
 	player.target_speed = 0.0
 	player.curr_dir = Vector3.ZERO
+	
+	
 func exit() -> void:
 	pass
 	

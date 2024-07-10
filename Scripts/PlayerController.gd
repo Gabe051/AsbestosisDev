@@ -14,9 +14,14 @@ var target_height = 1.8
 var crouch_depth = -0.65
 var crawl_depth = -1.3
 
-var gravity = 12.5
+var gravity = 11.0
 
 @onready var head := $Head
+@onready var standing_capsule := $StandingCapsule
+@onready var crouching_capsule := $CrouchingCapsule
+@onready var crawling_capsule := $CrawlingCapsule
+@onready var standing_cast = $StandingCast
+@onready var crouching_cast = $CrouchingCast
 
 
 func _ready():
