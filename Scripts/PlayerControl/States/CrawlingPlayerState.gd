@@ -7,7 +7,7 @@ extends State
 var crawl_transition : bool = false
 
 func enter() -> void:
-	player.target_speed = 2.0
+	player.target_speed = 1.5
 	player.target_height = player.height + player.crawl_depth
 	crawl_transition = true
 	player.standing_capsule.set_disabled(true)

@@ -8,7 +8,7 @@ var crouch_transition : bool = false
 
 func enter() -> void:
 	#Adjust player height and speed
-	player.target_speed = 4.0
+	player.target_speed = 3.5
 	player.target_height = player.height + player.crouch_depth
 	crouch_transition = true
 	player.standing_capsule.set_disabled(true)

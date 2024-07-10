@@ -5,7 +5,7 @@ extends State
 @onready var player := $"../.."
 
 func enter() -> void:
-	player.target_speed = 9.0
+	player.target_speed = 7.5
 	
 	
 func exit() -> void:

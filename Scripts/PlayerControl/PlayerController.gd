@@ -22,6 +22,7 @@ var gravity = 11.0
 @onready var crawling_capsule := $CrawlingCapsule
 @onready var standing_cast = $StandingCast
 @onready var crouching_cast = $CrouchingCast
+@onready var pickup_cast = $PickupCast
 
 
 func _ready():
