@@ -101,7 +101,3 @@ func item_held_consumed():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	inventory.resize(12)
-	
-	
-
-	
