@@ -5,13 +5,13 @@ extends Control
 @onready var inventory_ui = $"../.."
 @onready var texture_rect = $InnerBorder/TextureRect
 
-
+var item_name
 
 
 var index = -1
 
 func update_texture(new_tex):
-	texture_rect.set_texture(new_tex)
+	texture_rect.texture = (new_tex)
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -8,9 +8,14 @@ extends Control
 var item_held
 
 func set_item_held(texture):
-	mouse_drag_rect.texture = texture
-	item_held = true
-	mouse_drag_rect.show()
+	if texture:
+		mouse_drag_rect.set_texture(texture)
+		item_held = true
+		mouse_drag_rect.show()
+	else:
+		mouse_drag_rect.set_texture(null)
+		item_held = false
+		mouse_drag_rect.hide()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

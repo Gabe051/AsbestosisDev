@@ -16,7 +16,7 @@ func enter() -> void:
 	
 func exit() -> void:
 	item_state_machine.previous_state = item_state_machine.current_state
-	
+	pass
 func update(delta : float) -> void:
 	if highlighted_objects.size() > 0:
 		for item in highlighted_objects:
@@ -31,9 +31,9 @@ func update(delta : float) -> void:
 	if Input.is_action_just_pressed("item_interact") and pickup_cast.get_collider() is Item:
 		#I think should be able to empty array of highlighted objects on input hopefully upon
 		#Item pickup very unlikely other items are highlighted but one
-		
-		highlighted_objects = []
-		player_inventory.add_item(pickup_cast.get_collider())
+		if player_inventory.item_count < player_inventory.capacity:
+			highlighted_objects = []
+			player_inventory.add_item(pickup_cast.get_collider())
 			#add item
 		
 		

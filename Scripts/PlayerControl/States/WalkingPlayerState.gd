@@ -9,9 +9,6 @@ extends State
 func enter() -> void:
 	player.target_speed = 5.0
 	
-	
-	
-	
 func exit() -> void:
 	pass
 

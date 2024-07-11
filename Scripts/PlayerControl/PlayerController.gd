@@ -25,7 +25,6 @@ var inventory_open = false
 @onready var standing_cast = $StandingCast
 @onready var crouching_cast = $CrouchingCast
 @onready var pickup_cast = $PickupCast
-
 @onready var player_inventory = $PlayerInventory
 
 
