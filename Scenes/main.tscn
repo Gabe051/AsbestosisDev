@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dn8bl2u6mr243"]
+[gd_scene load_steps=12 format=3 uid="uid://dn8bl2u6mr243"]
 
 [ext_resource type="Texture2D" uid="uid://c5vnq84kslt6y" path="res://Assets/Textures/texture_07.png" id="1_01wmr"]
 [ext_resource type="Material" uid="uid://c54nnpjopcubv" path="res://Assets/Materials/OrangeBox.tres" id="2_ktuli"]
 [ext_resource type="PackedScene" uid="uid://cmd4bf331ys0d" path="res://Scenes/player.tscn" id="3_jagey"]
+[ext_resource type="PackedScene" uid="uid://3k7d5gxfocfe" path="res://Scenes/battery.tscn" id="4_exigc"]
+[ext_resource type="Script" path="res://Scripts/PickupAndInventory/Items/Battery.gd" id="5_jjo14"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jc3r8"]
 albedo_texture = ExtResource("1_01wmr")
@@ -30,6 +32,8 @@ sky = SubResource("Sky_igu8j")
 
 [node name="Ground" type="StaticBody3D" parent="Structures"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.0044, -0.49117, 0)
+collision_layer = 2
+collision_mask = 3
 
 [node name="GroundVis" type="MeshInstance3D" parent="Structures/Ground"]
 material_override = SubResource("StandardMaterial3D_jc3r8")
@@ -44,84 +48,112 @@ shape = SubResource("BoxShape3D_jpnc2")
 [node name="CSGBox3D" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.05418, 1.80589, -13.0786)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 20)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.5528, 1.79814, -2.57375)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 5.99036)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.5528, 1.77046, 1.1155)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 5.99036)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.539, 1.77046, 1.1155)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 5.99036)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.6378, 1.77046, -2.52323)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 5.99036)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 26.3926, 1.82789, -9.01339)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 16.5)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 23.6378, 1.77046, -17.0182)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 11)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D12" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 34.1378, 1.81746, -16.0182)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 14)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 25.1368, 1.81062, -22.6514)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 19)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D13" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-0.587432, 4.37114e-08, 0.809273, 0.809273, -4.37114e-08, 0.587432, 6.10519e-08, 1, -9.69699e-09, 31.1945, 1.60721, -19.6092)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(0.5, 3.67566, 6.28638)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D11" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(0.00105857, -0.000984055, 0.999999, 9.785e-05, 1, 0.00098395, -0.999999, 9.67849e-05, 0.00105867, 12.2927, 1.81348, -22.6794)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 3.67566, 7.5)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.4898, 0.476623, -9.02323)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(1, 1.08798, 1.1846)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.9376, 2.0185, -13.8221)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(5.60742, 1.08798, 4.37257)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D14" type="CSGBox3D" parent="Structures/Level"]
 transform = Transform3D(-4.37114e-08, -3.35679e-11, 1, -0.000767945, 1, 0, -1, -0.000767945, -4.37114e-08, 16.6648, 1.29526, -13.8221)
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 size = Vector3(5.60742, 1.08798, 4.37257)
 material = ExtResource("2_ktuli")
 
@@ -138,3 +170,12 @@ shadow_enabled = true
 environment = SubResource("Environment_36w63")
 
 [node name="Player" parent="." instance=ExtResource("3_jagey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00980568, -0.0534642, -2.24189)
+
+[node name="Battery" parent="." instance=ExtResource("4_exigc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.428634, -6.14933)
+script = ExtResource("5_jjo14")
+
+[node name="Battery2" parent="." instance=ExtResource("4_exigc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99479, 0.428634, -6.14933)
+script = ExtResource("5_jjo14")

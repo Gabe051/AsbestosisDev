@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmd4bf331ys0d"]
+[gd_scene load_steps=15 format=3 uid="uid://cmd4bf331ys0d"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerControl/PlayerController.gd" id="1_x1gqv"]
 [ext_resource type="Script" path="res://Scripts/PlayerControl/StateMachine.gd" id="2_ytu5n"]
@@ -11,9 +11,6 @@
 [ext_resource type="Script" path="res://Scripts/PickupAndInventory/ItemStateMachine.gd" id="9_pto0q"]
 [ext_resource type="Script" path="res://Scripts/PickupAndInventory/States/EmptyHandedPlayerState.gd" id="10_l8e2l"]
 [ext_resource type="Script" path="res://Scripts/PickupAndInventory/PlayerInventory.gd" id="11_jsaha"]
-[ext_resource type="Script" path="res://Scripts/PickupAndInventory/States/InInventoryState.gd" id="11_ntvem"]
-[ext_resource type="FontFile" uid="uid://dj7adk4gvkv3v" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="13_2k07q"]
-[ext_resource type="PackedScene" uid="uid://d1e7nhn8sor05" path="res://Scenes/inventory_UI.tscn" id="14_j45ao"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iq1uk"]
 
@@ -23,10 +20,6 @@ height = 1.5
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4woau"]
 radius = 0.4
 height = 0.8
-
-[sub_resource type="LabelSettings" id="LabelSettings_jhby2"]
-font = ExtResource("13_2k07q")
-font_size = 40
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0597537, 0)
@@ -90,34 +83,5 @@ current_state = NodePath("EmptyHandedPlayerState")
 [node name="EmptyHandedPlayerState" type="Node" parent="ItemStateMachine"]
 script = ExtResource("10_l8e2l")
 
-[node name="InInventoryState" type="Node" parent="ItemStateMachine"]
-script = ExtResource("11_ntvem")
-
 [node name="PlayerInventory" type="Node" parent="."]
 script = ExtResource("11_jsaha")
-
-[node name="InventoryUI" type="CanvasLayer" parent="PlayerInventory"]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="PlayerInventory/InventoryUI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.241156, 0.241156, 0.241156, 1)
-
-[node name="Label" type="Label" parent="PlayerInventory/InventoryUI/ColorRect"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -47.0
-offset_right = 47.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "Inventory"
-label_settings = SubResource("LabelSettings_jhby2")
-
-[node name="InventoryUi" parent="PlayerInventory/InventoryUI/ColorRect" instance=ExtResource("14_j45ao")]
-layout_mode = 1

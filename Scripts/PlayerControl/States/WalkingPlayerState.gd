@@ -33,6 +33,7 @@ func update(delta : float) -> void:
 	if Input.is_action_just_pressed("crawl"):
 		transition.emit("CrawlingPlayerState")
 	
+	
 
 func handle_input(event) -> void:
 	pass

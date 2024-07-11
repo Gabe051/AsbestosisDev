@@ -16,6 +16,8 @@ var crawl_depth = -1.3
 
 var gravity = 11.0
 
+var inventory_open = false
+
 @onready var head := $Head
 @onready var standing_capsule := $StandingCapsule
 @onready var crouching_capsule := $CrouchingCapsule
@@ -24,23 +26,29 @@ var gravity = 11.0
 @onready var crouching_cast = $CrouchingCast
 @onready var pickup_cast = $PickupCast
 
+@onready var player_inventory = $PlayerInventory
+
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and inventory_open == false:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sens))
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sens))
 		head.rotation.x = clamp(head.rotation.x,-(PI/2.0), PI/2.0,)
+	
 
 func _physics_process(delta):
-	
-	
-	curr_dir = lerp(curr_dir, transform.basis * 
-			Vector3(input_dir.x, 0, input_dir.y).normalized(), delta * lerp_speed)
-			
-	velocity.x = curr_dir.x * target_speed
-	velocity.z = curr_dir.z * target_speed
-	
+	if inventory_open == false:
+		curr_dir = lerp(curr_dir, transform.basis * 
+				Vector3(input_dir.x, 0, input_dir.y).normalized(), delta * lerp_speed)
+				
+		velocity.x = curr_dir.x * target_speed
+		velocity.z = curr_dir.z * target_speed
+	else:
+		if is_on_floor():
+			velocity.x = 0.0
+			velocity.z = 0.0
 	move_and_slide()

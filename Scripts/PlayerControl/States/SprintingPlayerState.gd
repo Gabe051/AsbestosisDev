@@ -27,7 +27,7 @@ func update(delta : float) -> void:
 	
 	if Input.is_action_just_pressed("crawl"):
 		transition.emit("CrawlingPlayerState")
-		
+	
 func physics_update(delta : float) -> void:
 	if not player.is_on_floor():
 		transition.emit("FallingPlayerState")

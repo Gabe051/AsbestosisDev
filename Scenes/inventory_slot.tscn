@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdy7t67cqwgmr"]
+
+[ext_resource type="Script" path="res://Scripts/PickupAndInventory/UI/inventory_slot.gd" id="1_lkytt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_prayg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hgwij"]
+
+[node name="InventorySlot" type="Control"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -894.0
+offset_bottom = -590.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lkytt")
+
+[node name="OuterBorder" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.144063, 0.144063, 0.144063, 1)
+
+[node name="InnerBorder" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 120.0
+offset_bottom = 120.0
+color = Color(0.377919, 0.377919, 0.377919, 1)
+
+[node name="TextureRect" type="TextureRect" parent="InnerBorder"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 1
+offset_right = 110.0
+offset_bottom = 110.0
+expand_mode = 1
+
+[node name="Item_Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_prayg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hgwij")
+button_mask = 3
+
+[connection signal="gui_input" from="Item_Button" to="." method="_on_item_button_gui_input"]
+[connection signal="mouse_entered" from="Item_Button" to="." method="_on_item_button_mouse_entered"]
+[connection signal="mouse_exited" from="Item_Button" to="." method="_on_item_button_mouse_exited"]
+[connection signal="pressed" from="Item_Button" to="." method="_on_item_button_pressed"]

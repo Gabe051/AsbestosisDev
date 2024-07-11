@@ -1,21 +1,6 @@
-class_name Item
+extends Node
 
-extends StaticBody3D
-
-
-@onready var outline = $Model/Outline
-@onready var pickup_cast = $Head/PickupCast
-
-
-var item_name := "item"
-
-#virtual functions
-func hold_item():
-	pass
-	
-func use_item():
-	pass
-
+signal item_dealt
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

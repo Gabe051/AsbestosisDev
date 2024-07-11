@@ -13,8 +13,7 @@ func exit() -> void:
 	pass
 	
 func update(delta : float) -> void:
-	player.velocity.x = 0.0
-	player.velocity.z = 0.0
+	
 	
 	if Input.get_vector("left","right","forward", "backward") != Vector2.ZERO:
 		transition.emit("WalkingPlayerState")

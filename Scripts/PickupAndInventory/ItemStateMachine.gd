@@ -3,6 +3,8 @@ class_name ItemStateMachine
 extends Node
 
 @export var current_state : State
+
+var previous_state : State
 var states: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.

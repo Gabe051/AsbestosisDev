@@ -1,13 +1,8 @@
-class_name Item
+class_name Battery
 
-extends StaticBody3D
+extends Item
 
-
-@onready var outline = $Model/Outline
-@onready var pickup_cast = $Head/PickupCast
-
-
-var item_name := "item"
+var gui_texture = load("res://Assets/Textures/durexell.png")
 
 #virtual functions
 func hold_item():
@@ -16,11 +11,9 @@ func hold_item():
 func use_item():
 	pass
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	item_name = "battery"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
