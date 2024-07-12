@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://cmd4bf331ys0d"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerControl/PlayerController.gd" id="1_x1gqv"]
+[ext_resource type="Script" path="res://Scripts/PlayerControl/StateMachine.gd" id="2_ytu5n"]
+[ext_resource type="Script" path="res://Scripts/PlayerControl/States/IdlePlayerState.gd" id="3_2ioi1"]
+[ext_resource type="Script" path="res://Scripts/PlayerControl/States/WalkingPlayerState.gd" id="4_1te1d"]
+[ext_resource type="Script" path="res://Scripts/PlayerControl/States/SprintingPlayerState.gd" id="5_4e6ws"]
+[ext_resource type="Script" path="res://Scripts/PlayerControl/States/CrouchingPlayerState.gd" id="6_uxwj3"]
+[ext_resource type="Script" path="res://Scripts/PlayerControl/States/CrawlingPlayerState.gd" id="7_dr030"]
+[ext_resource type="Script" path="res://Scripts/PlayerControl/States/FallingPlayerState.gd" id="8_a0ew8"]
+[ext_resource type="PackedScene" uid="uid://seut6g1o8ucb" path="res://Scenes/User Interface/Inventory.tscn" id="9_xxa2a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4woau"]
+radius = 0.4
+height = 0.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w8fdp"]
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iq1uk"]
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0597537, 0)
+collision_mask = 3
+script = ExtResource("1_x1gqv")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="PickupCast" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_ytu5n")
+current_state = NodePath("IdlePlayerState")
+
+[node name="IdlePlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("3_2ioi1")
+
+[node name="WalkingPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("4_1te1d")
+
+[node name="SprintingPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("5_4e6ws")
+
+[node name="CrouchingPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("6_uxwj3")
+
+[node name="CrawlingPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("7_dr030")
+
+[node name="FallingPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("8_a0ew8")
+
+[node name="StandingCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 2, 0)
+collision_mask = 3
+
+[node name="CrouchingCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 1.49, 0)
+collision_mask = 3
+
+[node name="CrawlingCapsule" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000533789, 0.379769, -0.00194401)
+shape = SubResource("CapsuleShape3D_4woau")
+
+[node name="CrouchingCapsule" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.748899, 0)
+shape = SubResource("CapsuleShape3D_w8fdp")
+
+[node name="StandingCapsule" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_iq1uk")
+
+[node name="Inventory" parent="." instance=ExtResource("9_xxa2a")]
+visible = false

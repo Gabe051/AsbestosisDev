@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://byxa82x8fckg4"]
+
+[ext_resource type="Script" path="res://Scripts/PickupAndInventory/Items/ItemType/BatteryType.gd" id="1_tbdel"]
+[ext_resource type="Texture2D" uid="uid://crj4sn7kfrxuy" path="res://Assets/Textures/durexell.png" id="2_cvw01"]
+
+[node name="Battery" type="Node"]
+script = ExtResource("1_tbdel")
+ID = null
+item_name = "Battery"
+texture = ExtResource("2_cvw01")

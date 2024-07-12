@@ -1,7 +1,6 @@
-class_name Held_Filter
+extends ColorRect
 
-extends Held_Item
-
+@onready var inventory_button = $InventoryButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
