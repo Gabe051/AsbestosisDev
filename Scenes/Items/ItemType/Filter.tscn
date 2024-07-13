@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba50a7u1ty32r"]
+
+[ext_resource type="Script" path="res://Scripts/PickupAndInventory/Items/ItemType/FilterType.gd" id="1_ohgo2"]
+[ext_resource type="Texture2D" uid="uid://duicl2wsg36c3" path="res://Assets/Textures/filter_text_temp.jpg" id="2_lnrfc"]
+
+[node name="Filter" type="Node"]
+script = ExtResource("1_ohgo2")
+item_name = "Filter"
+texture = ExtResource("2_lnrfc")

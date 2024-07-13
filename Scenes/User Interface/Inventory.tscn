@@ -67,4 +67,6 @@ offset_bottom = 40.0
 mouse_filter = 2
 expand_mode = 3
 
+[node name="Inventory_Node" type="Node" parent="."]
+
 [connection signal="button_down" from="AddButtonTest" to="." method="_on_add_button_test_button_down"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn8bl2u6mr243"]
+[gd_scene load_steps=12 format=3 uid="uid://dn8bl2u6mr243"]
 
 [ext_resource type="Texture2D" uid="uid://c5vnq84kslt6y" path="res://Assets/Textures/texture_07.png" id="1_01wmr"]
 [ext_resource type="Material" uid="uid://c54nnpjopcubv" path="res://Assets/Materials/OrangeBox.tres" id="2_ktuli"]
 [ext_resource type="PackedScene" uid="uid://cmd4bf331ys0d" path="res://Scenes/Player/player.tscn" id="3_jagey"]
 [ext_resource type="PackedScene" uid="uid://cy4ubofs4c52d" path="res://Scenes/Items/GroundItem/GroundBattery.tscn" id="4_oxeet"]
+[ext_resource type="PackedScene" uid="uid://bjg2n6h5j2mgx" path="res://Scenes/Items/GroundItem/GroundFilter.tscn" id="5_k3d66"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jc3r8"]
 albedo_texture = ExtResource("1_01wmr")
@@ -16,14 +17,21 @@ size = Vector3(89.5759, 0.845658, 86.5329)
 [sub_resource type="BoxShape3D" id="BoxShape3D_jpnc2"]
 size = Vector3(89.5759, 0.845658, 86.5329)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_21yhi"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_drgl6"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.381229, 0.390186, 0.404325, 1)
+sky_curve = 0.252268
 
-[sub_resource type="Sky" id="Sky_igu8j"]
-sky_material = SubResource("ProceduralSkyMaterial_21yhi")
+[sub_resource type="Sky" id="Sky_vnr5l"]
+sky_material = SubResource("ProceduralSkyMaterial_drgl6")
 
 [sub_resource type="Environment" id="Environment_36w63"]
 background_mode = 2
-sky = SubResource("Sky_igu8j")
+sky = SubResource("Sky_vnr5l")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.4
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 0.46
 
 [node name="Main" type="Node"]
 
@@ -33,6 +41,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9757, 9.01211, -0.640891)
 [node name="Level" type="Node" parent="."]
 
 [node name="Lights" type="Node" parent="Level"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8671, 1.34712, -20.0085)
+omni_attenuation = 1.31951
 
 [node name="Structures" type="Node" parent="Level"]
 
@@ -140,6 +152,22 @@ use_collision = true
 collision_layer = 2
 collision_mask = 3
 size = Vector3(1, 14.5573, 4.43935)
+material = ExtResource("2_ktuli")
+
+[node name="CSGBox3D35" type="CSGBox3D" parent="Level/Structures/Walls"]
+transform = Transform3D(-4.37114e-08, 1, -9.31764e-22, -1, -4.37114e-08, 0, 0, 0, 1, 46.2716, 11.8228, -4.90612)
+use_collision = true
+collision_layer = 2
+collision_mask = 3
+size = Vector3(1, 26.6043, 24.4902)
+material = ExtResource("2_ktuli")
+
+[node name="CSGBox3D36" type="CSGBox3D" parent="Level/Structures/Walls"]
+transform = Transform3D(-4.37114e-08, 1, -9.31764e-22, -1, -4.37114e-08, 0, 0, 0, 1, 41.6846, 11.8228, 11.9812)
+use_collision = true
+collision_layer = 2
+collision_mask = 3
+size = Vector3(1, 17.4303, 9.49597)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D25" type="CSGBox3D" parent="Level/Structures/Walls"]
@@ -255,11 +283,11 @@ size = Vector3(1, 12.3468, 14.5167)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="Level/Structures/Walls"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 25.1368, 1.81062, -22.6514)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 25.1368, 3.85045, -22.6514)
 use_collision = true
 collision_layer = 2
 collision_mask = 3
-size = Vector3(1, 3.67566, 19)
+size = Vector3(1, 7.75531, 19)
 material = ExtResource("2_ktuli")
 
 [node name="CSGBox3D13" type="CSGBox3D" parent="Level/Structures/Walls"]
@@ -326,8 +354,7 @@ shape = SubResource("BoxShape3D_jpnc2")
 [node name="Environment" type="Node" parent="Level"]
 
 [node name="Sun" type="DirectionalLight3D" parent="Level/Environment"]
-transform = Transform3D(0.999999, -0.00108784, -0.00030623, 0.000357616, 0.0475547, 0.998869, -0.00107204, -0.998868, 0.0475551, -0.00568104, 8.84349, 0.332421)
-light_energy = 0.677
+transform = Transform3D(0.999999, -0.00108783, -0.000306234, -0.000157026, -0.402096, 0.915598, -0.00111915, -0.915597, -0.402096, -0.00568104, 8.84349, 0.332421)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Level/Environment"]
@@ -343,3 +370,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.6609, 0.530593, -3.4108)
 
 [node name="GroundBattery3" parent="Level/Item_pickups" instance=ExtResource("4_oxeet")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.9081, 0.530593, -6.51236)
+
+[node name="GroundFilter" parent="Level/Item_pickups" instance=ExtResource("5_k3d66")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.2466, 0.436925, -2.22152)

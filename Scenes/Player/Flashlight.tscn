@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://m47vtygjdvmk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6vks"]
+albedo_color = Color(1, 1, 0.160784, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ovh1b"]
+material = SubResource("StandardMaterial3D_v6vks")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i36cd"]
+albedo_color = Color(0.273873, 0.273873, 0.273873, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a4bx0"]
+material = SubResource("StandardMaterial3D_i36cd")
+
+[sub_resource type="BoxMesh" id="BoxMesh_6xtfd"]
+
+[node name="Flashlight" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.211908, 0, 0, 0, 0.164938, 0, 0, 0, 0.463603, 0, 0, 0)
+mesh = SubResource("BoxMesh_ovh1b")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, -3.29391e-09, 0.315, 0, -0.0753559, -1.37691e-08, 0, 0, -0.196092)
+mesh = SubResource("CylinderMesh_a4bx0")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, 0.0171798, -0.0759707, 0, 0.00991875, 0.131585, -0.000119448, 0.105132, 0.146022)
+mesh = SubResource("BoxMesh_6xtfd")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, 0.0198375, -6.45038e-09, 0, -9.31323e-10, 0.131544, -0.000119448, 0.142105, 0.0208323)
+mesh = SubResource("BoxMesh_6xtfd")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, 0.00991875, 0.0826879, 0, -0.0171798, 0.0477399, -1.64509e-05, 0.106032, -0.0599511)
+mesh = SubResource("BoxMesh_6xtfd")

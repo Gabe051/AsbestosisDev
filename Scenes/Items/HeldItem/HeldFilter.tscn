@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8cjt7r6ehc7o"]
+
+[ext_resource type="Script" path="res://Scripts/PickupAndInventory/Items/HeldItem/HeldFilter.gd" id="1_bv4ql"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ny57g"]
+albedo_color = Color(0.192157, 0.403922, 0.207843, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tjpoo"]
+material = SubResource("StandardMaterial3D_ny57g")
+
+[node name="HeldFilter" type="Node3D"]
+script = ExtResource("1_bv4ql")
+item_name = "Held_Filter"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.332423, 0, 0, 0, 0.0663077, 0, 0, 0, 0.33725, 0, 0, 0)
+mesh = SubResource("CylinderMesh_tjpoo")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://8urlmdci8h8f"]
+
+[ext_resource type="Script" path="res://Scripts/PickupAndInventory/Items/HeldItem/HeldBattery.gd" id="1_iu3uk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vo354"]
+albedo_color = Color(0.537011, 0.537011, 0.537011, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ebw61"]
+material = SubResource("StandardMaterial3D_vo354")
+
+[node name="HeldBattery" type="Node3D"]
+transform = Transform3D(0.296804, 0, 0, 0, 0.16574, 0, 0, 0, 0.172628, 0, 0, 0)
+script = ExtResource("1_iu3uk")
+item_name = "Held_Battery"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.417928, 0, 0, 0, 0.388926, 0, 0, 0, 1.40714, 0, 0, 0)
+mesh = SubResource("BoxMesh_ebw61")

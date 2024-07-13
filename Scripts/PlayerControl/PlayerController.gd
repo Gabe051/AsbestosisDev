@@ -15,6 +15,8 @@ var crouch_depth = -0.65
 var crawl_depth = -1.3
 
 var gravity = 11.0
+var battery_power = 100.0
+
 
 #Head Pivot
 @onready var head := $Head
@@ -28,12 +30,18 @@ var gravity = 11.0
 @onready var crouching_cast = $CrouchingCast
 @onready var pickup_cast = $Head/PickupCast
 
+var flash_on = false
+
 
 #Inventory
 var is_in_inventory = false
 @onready var inventory = $Inventory
+@onready var hand = $Head/Hand
+@onready var flashlight = $Head/Flashlight_Beam
 
+var item_being_held = false
 var highlighted_objects = []
+
 
 
 func _ready():
@@ -43,22 +51,52 @@ func _process(delta):
 	
 	check_item_highlight()
 	
+	if flash_on:
+		if battery_power > 0.0:
+			drain_flash_power(delta)
+		else:
+			toggle_flash()
+	
 	if Input.is_action_just_pressed("inventory"):
 		inventory.open_close()
-	if Input.is_action_just_pressed("item_interact") and !is_in_inventory:
-		if pickup_cast.get_collider() is GroundItem:
-			var item_clicked = pickup_cast.get_collider()
-			if inventory.item_count < inventory.inventory_capacity:
-				highlighted_objects = []
-				inventory.add_item(CustomItemLoader.load_item_to_inventory(item_clicked))
-				item_clicked.queue_free()
+		
+		
+	if !item_being_held:
+		if Input.is_action_just_pressed("item_interact") and !is_in_inventory:
+			if pickup_cast.get_collider() is GroundItem:
+				var item_clicked = pickup_cast.get_collider()
+				if inventory.item_count < inventory.inventory_capacity:
+					highlighted_objects = []
+					inventory.add_item(CustomItemLoader.load_item_to_inventory(item_clicked))
+					item_clicked.queue_free()
+					
+	else:
+		if Input.is_action_just_pressed("put_away") and !is_in_inventory:
+			inventory.put_away_item()
+		
+		
 				
 func _input(event):
 	if event is InputEventMouseMotion and !is_in_inventory:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sens))
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sens))
 		head.rotation.x = clamp(head.rotation.x,-(PI/2.0), PI/2.0,)
-
+	
+	#Use item
+	if event.is_action_pressed("use") and !is_in_inventory and item_being_held:
+			var use_result = inventory.item_held.use_item(self)
+			if use_result == false:
+				print("You cant use that right now")
+			else:
+				inventory.item_held.queue_free()
+				inventory.item_held = null
+				item_being_held = false
+	
+	#Toggle flashlight
+	if event.is_action_pressed("flash_toggle") and !is_in_inventory:
+		toggle_flash()
+	
+	
 func _physics_process(delta):
 	
 	if !is_in_inventory:
@@ -83,4 +121,20 @@ func check_item_highlight():
 			pickup_cast.get_collider().outline.show()
 			highlighted_objects.append(pickup_cast.get_collider())
 	
+func toggle_flash():
+	if !flash_on and battery_power > 0.0:
+		flash_on = true
+		flashlight.show()
+	elif !flash_on and battery_power <= 0.0:
+		#insert code for a short flicker
+		pass
+	else:
+		flash_on = false
+		flashlight.hide()
 	
+func drain_flash_power(delta):
+	if battery_power > 0.0:
+		battery_power -= 1.0 * delta
+	
+	if battery_power < 0.0:
+		battery_power = 0.0

@@ -13,7 +13,7 @@ var inventory = []
 
 #Item Rearrangement
 var item_dragging
-
+var item_held
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -71,7 +71,14 @@ func add_item_at(item: Item, index : int):
 	slot.update_item(item)
 	item_count += 1
 	
-
+func remove_and_free(index : int):
+	var item_to_remove = inventory[index]
+	inventory[index] = null
+	item_to_remove.queue_free()
+	var slot = get_grid_slot(index)
+	slot.update_item(null)
+	item_count -= 1
+	
 func remove_item(index : int):
 	inventory[index] = null
 	var slot = get_grid_slot(index)
@@ -80,6 +87,11 @@ func remove_item(index : int):
 	
 func get_grid_slot(index : int):
 	return grid_container.get_child(index).get_node("InventoryButton")
+
+func put_away_item():
+	add_item(CustomItemLoader.load_item_to_inventory(item_held))
+	item_held.queue_free()
+	player.item_being_held = false
 
 func OnButtonClicked(item, index):
 	# Consider replacing / refactoring this
@@ -102,10 +114,25 @@ func OnButtonClicked(item, index):
 			add_item_at(item_dragging, index)
 			item_dragging = temp_item
 			drag_icon.texture = item_dragging.texture
-		
-	if Input.is_action_just_pressed("use"):
-		pass
 
+
+	if Input.is_action_just_pressed("use"):
+		if inventory[index] and !item_held:
+			item_held = CustomItemLoader.load_item_to_hand(inventory[index])
+			remove_and_free(index)
+			open_close()
+			player.hand.add_child(item_held)
+			player.item_being_held = true
+		elif inventory[index] and item_held:
+			var item_put_away = CustomItemLoader.load_item_to_inventory(item_held)
+			item_held.queue_free()
+			item_held = CustomItemLoader.load_item_to_hand(inventory[index])
+			remove_and_free(index)
+			player.hand.add_child(item_held)
+			player.item_being_held = true
+			add_item_at(item_put_away, index)
+			open_close()
+			
 # DELETE LATER
 func _on_add_button_test_button_down():
 	var battery_item = load("res://Scenes/Items/ItemType/Battery.tscn")
